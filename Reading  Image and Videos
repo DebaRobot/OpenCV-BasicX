@@ -1,0 +1,26 @@
+import cv2 as cv
+import numpy as np
+
+img = cv.imread("C:/Users/h22de/OneDrive/Desktop/photo-1524492412937-b28074a5d7da.jpg")
+
+cv.imshow("Window", img)
+cv.waitKey(0)
+
+----------------------------------------------------------------------------
+
+import cv2 as cv
+import numpy as np
+
+cap = cv.VideoCapture("C:/Users/h22de/Videos/Project Template.mp4")
+
+while True:
+    isTrue, capture = cap.read()
+    cv.imshow("Video", capture)
+    
+    if cv.waitKey(20)  & 0xFF == ord('d'):
+        break
+capture.release()
+cv.destroyAllWindows()
+
+------------------------------------------------------------------------------------
+
