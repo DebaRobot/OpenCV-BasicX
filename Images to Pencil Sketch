@@ -1,0 +1,45 @@
+#Importing all the libraries
+import cv2 as cv
+import numpy as np
+
+
+#Resizing the Images
+def rescaleFrame(frame, scale = 0.50):
+    width = int(frame.shape[1]*scale)
+    height = int(frame.shape[0]*scale)
+    dimensions = (width, height)
+    
+    return cv.resize(frame,dimensions, interpolation = cv.INTER_AREA)
+
+
+#Loading the Images
+img  = cv.imread("C:/Users/h22de/OneDrive/Desktop/l197_13791597837663.webp")
+
+#Resizing the image into the Frames
+img_resized = rescaleFrame(img)
+cv.imshow("Window", img_resized)
+
+
+#Converting the images into grey Scale
+grey = cv.cvtColor(img_resized, cv.COLOR_BGR2GRAY)
+
+#Showing the Inverted Image as the OUtput
+invert = 255 - grey
+cv.imshow("Inverted grey", grey)
+
+#Apply a Guassian Blur  to blur the image
+blur = cv.GaussianBlur(invert, (15,15), 0)
+
+#Inverting the Blur Images
+invertBlur = 255 - blur
+cv.imshow("Windows", invertBlur)
+
+#Finally Combining the Subsequent  Images into Sketch Variable
+sketch  = cv.divide(grey, invertBlur,  scale = 256.0)
+cv.imshow("Sketch", sketch)
+
+#Terminate the program
+cv.waitKey(0)
+cv.destroyAllWindows()
+
+
